@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonMakeTier.Spa", "PokemonMakeTier.Spa\PokemonMakeTier.Spa.csproj", "{82D54686-C728-4A36-8A89-63EF602D19BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonMakeTier.Entity", "PokemonMakeTier.Entity\PokemonMakeTier.Entity.csproj", "{7E11CA6B-30E6-418B-8829-CA88139A6D3B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonMakeTier.Data", "PokemonMakeTier.Data\PokemonMakeTier.Data.csproj", "{1BC22E19-6EB9-4E14-9FD6-DBBCAD3AD76D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonMakeTier.Service", "PokemonMakeTier.Service\PokemonMakeTier.Service.csproj", "{0BB941FA-EABC-48A0-8607-64B59332EDA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82D54686-C728-4A36-8A89-63EF602D19BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82D54686-C728-4A36-8A89-63EF602D19BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82D54686-C728-4A36-8A89-63EF602D19BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82D54686-C728-4A36-8A89-63EF602D19BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E11CA6B-30E6-418B-8829-CA88139A6D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E11CA6B-30E6-418B-8829-CA88139A6D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E11CA6B-30E6-418B-8829-CA88139A6D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E11CA6B-30E6-418B-8829-CA88139A6D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC22E19-6EB9-4E14-9FD6-DBBCAD3AD76D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC22E19-6EB9-4E14-9FD6-DBBCAD3AD76D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC22E19-6EB9-4E14-9FD6-DBBCAD3AD76D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC22E19-6EB9-4E14-9FD6-DBBCAD3AD76D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BB941FA-EABC-48A0-8607-64B59332EDA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB941FA-EABC-48A0-8607-64B59332EDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BB941FA-EABC-48A0-8607-64B59332EDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BB941FA-EABC-48A0-8607-64B59332EDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA8D33AC-B790-4FF5-8490-651DAA4ADC96}
+	EndGlobalSection
+EndGlobal
