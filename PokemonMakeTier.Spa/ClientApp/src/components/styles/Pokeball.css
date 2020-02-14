@@ -26,6 +26,7 @@
     border: 5px solid #333;
     position: absolute;
     margin: 64px;
+    cursor: pointer;
 }
 
 .ball .pokeball-btn::after {
@@ -51,4 +52,29 @@
     height: 90px;
     background-color: #e62327;
     border-bottom: 20px solid #333;
+}
+
+.spanImage {
+    padding-left:13px;
+    padding-top: 33px;
+    
+    display:inline-block;
+}
+
+.pokeImage{
+    width: 140px; 
+    height: 140px;
+}
+
+.fadeOut{
+    display: none;
+}
+
+.fadeIn{
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%;
 }

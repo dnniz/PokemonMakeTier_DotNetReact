@@ -9,12 +9,22 @@ class Home extends React.Component {
 
     this.state = {
       pokeballs: [],
-      numPokeballs: 20
+      numPokeballs: 20,
+      numMaxPokedex: 809
     };
   }
 
   handleClickPokeball = dexId => {
     alert("POKEMON!" + dexId);
+  };
+
+  generateRandomNumPokedex = () => {
+    var generate = Math.floor(Math.random() * this.state.numMaxPokedex);
+    var strNumPokedex =
+      generate.toString().length < 3
+        ? generate.toString().padStart(3, "0")
+        : generate.toString();
+    return strNumPokedex;
   };
 
   render() {
@@ -41,12 +51,14 @@ class Home extends React.Component {
 
   createPokeballs = () => {
     for (let index = 1; index <= this.state.numPokeballs; index++) {
+      const numPokedex = this.generateRandomNumPokedex();
       this.setState(prevState => ({
         pokeballs: [
           ...prevState.pokeballs,
           <Pokeball
             index={index}
-            onClickPokeball={() => this.handleClickPokeball(index)}
+            onClickPokeball={this.handleClickPokeball}
+            onRandomNumPokedex={numPokedex}
           />
         ]
       }));

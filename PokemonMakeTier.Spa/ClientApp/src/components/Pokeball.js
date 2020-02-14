@@ -4,6 +4,7 @@ import "./styles/Pokeball.css";
 import { keyframes } from "styled-components";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
+import "animate.css";
 
 function useMovePokeball(index) {
   const [prevVector, setPrevVector] = useState({
@@ -12,8 +13,10 @@ function useMovePokeball(index) {
   });
 
   const [nextVector, setNextVector] = useState({
-    x: 0,
-    y: 0
+    // x: 0,
+    // y: 0
+    x: Math.random() * (index % 2 === 0 ? -1 * index : index),
+    y: Math.random() * (index % 2 === 0 ? -1 * index : index)
   });
 
   useEffect(() => {
@@ -25,9 +28,6 @@ function useMovePokeball(index) {
       });
     }, 8000);
 
-    //x: Math.random() * (index % 2 === 0 ? -1 * index : index) < 15? cantidad * Math.random() :  (index % 2 === 0 ? -1 * index : index
-    //y: Math.random() * (index % 2 === 0 ? -1 * index : index) < 15? cantidad * Math.random() :  (index % 2 === 0 ? -1 * index : index)
-
     return () => clearTimeout(idInterval);
   });
 
@@ -36,6 +36,7 @@ function useMovePokeball(index) {
 
 function Pokeball(props) {
   const [prevX, prevY, nextX, nextY] = useMovePokeball(props.index);
+  const [fadeIn, setFadeIn] = useState(true);
 
   let move = keyframes`
                     from {
@@ -46,27 +47,25 @@ function Pokeball(props) {
                     }
                     `;
 
-  // let move = keyframes`
-  //                   from {
-  //                     transform:  translate(${prevX}rem, ${prevY}rem);
-  //                   }
-  //                   to {
-  //                     transform: translate(${nextX}rem, ${nextY}rem);
-  //                   }
-  //                   `;
-
-  //   const Move = styled.div`
-  //   animation: ${move} 4s ease-in-out alternate both infinite;
-  // `;
-
   const Move = styled.div`
     animation: ${move} 8s ease-out alternate both infinite;
   `;
 
   return (
     <Move>
-      <div className="ball poke">
-        <div className="pokeball-btn" onClick={props.onClickPokeball}></div>
+      <div className={fadeIn ? "ball poke" : "ball animated swing"}>
+        <span className={fadeIn ? "spanImage fadeOut" : "spanImage fadeIn"}>
+          <img
+            className="pokeImage"
+            src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${props.onRandomNumPokedex}.png`}
+          ></img>
+        </span>
+        <div
+          className={fadeIn ? "pokeball-btn" : ""}
+          onClick={() => {
+            setFadeIn(false);
+          }}
+        ></div>
       </div>
     </Move>
   );
