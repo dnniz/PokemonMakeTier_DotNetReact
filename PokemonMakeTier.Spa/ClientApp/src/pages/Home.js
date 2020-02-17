@@ -9,7 +9,7 @@ class Home extends React.Component {
 
     this.state = {
       pokeballs: [],
-      numPokeballs: 20,
+      numPokeballs: 25,
       numMaxPokedex: 809
     };
   }

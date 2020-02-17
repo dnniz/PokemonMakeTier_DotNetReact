@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./styles/Pokeball.css";
 import { keyframes } from "styled-components";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
 import "animate.css";
 
 function useMovePokeball(index) {
@@ -13,48 +12,69 @@ function useMovePokeball(index) {
   });
 
   const [nextVector, setNextVector] = useState({
-    // x: 0,
-    // y: 0
     x: Math.random() * (index % 2 === 0 ? -1 * index : index),
     y: Math.random() * (index % 2 === 0 ? -1 * index : index)
   });
 
-  useEffect(() => {
-    const idInterval = setTimeout(() => {
-      setPrevVector({ x: nextVector.x, y: nextVector.y });
-      setNextVector({
-        x: Math.random() * (index % 2 === 0 ? -1 * index : index),
-        y: Math.random() * (index % 2 === 0 ? -1 * index : index)
-      });
-    }, 8000);
-
-    return () => clearTimeout(idInterval);
-  });
-
-  return [prevVector.x, prevVector.y, nextVector.x, nextVector.y];
+  return [
+    prevVector.x,
+    prevVector.y,
+    nextVector.x,
+    nextVector.y,
+    setNextVector,
+    setPrevVector
+  ];
 }
 
 function Pokeball(props) {
-  const [prevX, prevY, nextX, nextY] = useMovePokeball(props.index);
+  const [
+    prevX,
+    prevY,
+    nextX,
+    nextY,
+    setNextVector,
+    setPrevVector
+  ] = useMovePokeball(props.index);
+
   const [fadeIn, setFadeIn] = useState(true);
 
   let move = keyframes`
-                    from {
-                      transform:  translate(${prevX}vw, ${prevY}vh);
-                    }
-                    to {
-                      transform: translate(${nextX}vw, ${nextY}vh);
-                    }
-                    `;
+                      from {
+                        transform:  translate(${prevX}vw, ${prevY}vw);
+                      }
+                      to {
+                          transform: translate(${nextX}vw, ${nextY}vw);
+                      }
+                      `;
 
   const Move = styled.div`
-    animation: ${move} 8s ease-out alternate both infinite;
+    animation: ${move} 10s ease-in-out 0s alternate 1 both running;
   `;
 
   return (
-    <Move>
-      <div className={fadeIn ? "ball poke" : "ball animated swing"}>
-        <span className={fadeIn ? "spanImage fadeOut" : "spanImage fadeIn"}>
+    <Move
+      onAnimationEnd={() => {
+        if (!fadeIn) {
+          setFadeIn(true);
+        }
+        setPrevVector({
+          x: nextX,
+          y: nextY
+        });
+
+        setNextVector({
+          x:
+            Math.random() *
+            (props.index % 2 === 0 ? -1 * props.index : props.index),
+          y:
+            Math.random() *
+            (props.index % 2 === 0 ? -1 * props.index : props.index)
+        });
+      }}
+    >
+      <div className={fadeIn ? "ball poke" : "ball poke animated swing"}>
+        {/* <span className={fadeIn ? "spanImage fadeOut" : "spanImage fadeIn"}> */}
+        <span className={"spanImage fadeOut"}>
           <img
             className="pokeImage"
             src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${props.onRandomNumPokedex}.png`}
