@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./styles/Pokeball.css";
 import { keyframes } from "styled-components";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
 import "animate.css";
 
 function useMovePokeball(index) {
@@ -13,8 +12,6 @@ function useMovePokeball(index) {
   });
 
   const [nextVector, setNextVector] = useState({
-    // x: 0,
-    // y: 0
     x: Math.random() * (index % 2 === 0 ? -1 * index : index),
     y: Math.random() * (index % 2 === 0 ? -1 * index : index)
   });
@@ -26,7 +23,7 @@ function useMovePokeball(index) {
         x: Math.random() * (index % 2 === 0 ? -1 * index : index),
         y: Math.random() * (index % 2 === 0 ? -1 * index : index)
       });
-    }, 8000);
+    }, 60000);
 
     return () => clearTimeout(idInterval);
   });
@@ -48,24 +45,41 @@ function Pokeball(props) {
                     `;
 
   const Move = styled.div`
-    animation: ${move} 8s ease-out alternate both infinite;
+    animation: ${move} 60s ease-out alternate both infinite;
   `;
 
   return (
     <Move>
-      <div className={fadeIn ? "ball poke" : "ball animated swing"}>
-        <span className={fadeIn ? "spanImage fadeOut" : "spanImage fadeIn"}>
-          <img
-            className="pokeImage"
-            src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${props.onRandomNumPokedex}.png`}
-          ></img>
-        </span>
+      <div
+        className={
+          fadeIn ? `ball ${props.typePokeBall}` : `ball animated swing`
+        }
+      >
         <div
           className={fadeIn ? "pokeball-btn" : ""}
           onClick={() => {
             setFadeIn(false);
           }}
         ></div>
+
+        {props.isLegendary ? (
+          <React.Fragment>
+            <span>W</span>
+            <div className="pattern left"></div>
+            <div className="pattern right"></div>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="pattern top"></div>
+            <div className="pattern bottom"></div>
+          </React.Fragment>
+        )}
+        <span className={fadeIn ? "spanImage fadeOut" : "spanImage fadeIn"}>
+          <img
+            className="pokeImage"
+            src={`https://pokeres.bastionbot.org/images/pokemon/${props.onRandomNumPokedex}.png`}
+          ></img>
+        </span>
       </div>
     </Move>
   );

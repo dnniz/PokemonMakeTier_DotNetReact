@@ -1,76 +1,179 @@
-
-*:before, *:after {
-    content: "";
-    position: absolute;
+*:before,
+*:after {
+  content: "";
+  position: absolute;
 }
 
 .ball {
-    border-radius: 50%;
-    width: 200px;
-    height: 200px;
-    float: left;
-    overflow: hidden;
-    z-index: 1;
-    margin: 30px;
-    border: 8px solid #333;
-    box-shadow: inset -10px 10px 0 10px #ccc;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  float: left;
+  overflow: hidden;
+  z-index: 1;
+  margin: 30px;
+  border: 8px solid #333;
+  box-shadow: inset -10px 10px 0 10px #ccc;
+  position: relative;
 }
 
 .ball .pokeball-btn {
-    /* -webkit-border-radius: 50%;
-    -moz-border-radius: 50%; */
-    border-radius: 50%;
-    width: 62px;
-    height: 62px;
-    background-color: white;
-    border: 5px solid #333;
-    position: absolute;
-    margin: 64px;
-    cursor: pointer;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  background-color: white;
+  border: 5px solid #333;
+  position: absolute;
+  margin: 59px;
+  cursor: pointer;
+  margin-top: 60px;
 }
 
 .ball .pokeball-btn::after {
-    /* -webkit-border-radius: 50%;
-    -moz-border-radius: 50%; */
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    background-color: #a2a2a2;
-    border: 5px solid #333;
-    margin: 7px;
-    }
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background-color: #a2a2a2;
+  border: 5px solid #333;
+  margin: 7px;
+}
 
 .ball.fixed {
-    overflow: visible;
+  overflow: visible;
 }
 
 .ball.poke::before {
-    /*-webkit-border-radius: 100px 100px 0 0;
-    -moz-border-radius: 100px 100px 0 0;*/
-    border-radius: 100px 100px 0 0;
-    width: 185px; /*width: 200px;*/
-    height: 90px;
-    background-color: #e62327;
-    border-bottom: 20px solid #333;
+  /* -webkit-border-radius: 100px 100px 0 0;
+    -moz-border-radius: 100px 100px 0 0; */
+  border-radius: 100px 100px 0 0;
+  width: 185px;
+  height: 100px;
+  background-color: #e62327;
+  border-bottom: 20px solid #333;
 }
 
+/*  GREAT BALL  */
+
+.ball.great::before {
+  -webkit-border-radius: 100px 100px 0 0;
+  -moz-border-radius: 100px 100px 0 0;
+  border-radius: 100px 100px 0 0;
+  width: 200px;
+  height: 90px;
+  background-color: #478ecc;
+  border-bottom: 20px solid #333;
+}
+.ball.great .pattern {
+  width: 33px;
+  height: 0;
+  position: absolute;
+  border-top: 80px solid #e62327;
+  border-right: 30px solid transparent;
+  border-left: 30px solid transparent;
+  margin: -3px 0 0 -10px;
+}
+.ball.great .pattern.left {
+  transform: rotate(-45deg);
+}
+.ball.great .pattern.right {
+  margin-left: 115px;
+  transform: rotate(45deg);
+}
+
+/*   ULTRA BALL   */
+
+.ball.ultra::before {
+  -webkit-border-radius: 100px 100px 0 0;
+  -moz-border-radius: 100px 100px 0 0;
+  border-radius: 100px 100px 0 0;
+  width: 185px;
+  height: 100px;
+  background-color: #424242;
+  border-bottom: 20px solid #333;
+}
+.ball.ultra .pattern {
+  position: absolute;
+}
+.ball.ultra .pattern.top {
+  width: 200px;
+  height: 20px;
+  background-color: #f2ec14;
+}
+.ball.ultra .pattern.bottom {
+  margin-top: 20px;
+  margin-left: 30px;
+  width: 124px;
+  height: 60px;
+  border-right: 25px solid #f2ec14;
+  border-left: 25px solid #f2ec14;
+  position: absolute;
+}
+
+/*    MASTER BALL    */
+
+.ball.master::before {
+  -webkit-border-radius: 100px 100px 0 0;
+  -moz-border-radius: 100px 100px 0 0;
+  border-radius: 100px 100px 0 0;
+  width: 185px;
+  height: 100px;
+  background-color: #5a5597;
+  border-bottom: 20px solid #333;
+}
+.ball.master span {
+  position: absolute;
+  left: 76px;
+  color: white;
+  font-size: 38px;
+  line-height: 80px;
+  -webkit-transform:rotate(-180deg);
+  -moz-transform:rotate(-180deg);
+  -o-transform:rotate(-180deg);
+  transform:rotate(-180deg);
+  ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+.ball.master .pattern {
+  -webkit-border-radius: 20px / 50px;
+  -moz-border-radius: 20px / 50px;
+  border-radius: 20px / 50px;
+  width: 35px;
+  height: 80px;
+  background-color: #bb71ac;
+  border: 8px solid #333;
+  /* position: absolute; */
+  position: fixed;
+  margin: -10px 0 0 8px;
+}
+.ball.master .pattern.left {
+  transform: rotate(40deg);
+}
+.ball.master .pattern.right {
+  transform: rotate(-40deg);
+  margin-left: 148px;
+}
+
+/* ESTILOS COMPONENTES */
 .spanImage {
-    padding-left:13px;
-    padding-top: 33px;
-    
-    display:inline-block;
+  padding-left: 13px;
+  padding-top: 33px;
+  display: inline-block;
 }
 
-.pokeImage{
-    width: 140px; 
-    height: 140px;
+.pokeImage {
+  width: 140px;
+  height: 140px;
 }
 
-.fadeOut{
-    display: none;
+.fadeOut {
+  display: none;
 }
 
-.fadeIn{
+.fadeIn {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
