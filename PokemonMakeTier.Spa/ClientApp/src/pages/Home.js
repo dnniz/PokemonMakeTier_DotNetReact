@@ -3,6 +3,7 @@ import React from "react";
 import "./styles/Home.css";
 import Pokeball from "../components/Pokeball";
 import api from "../api";
+import LoginModal from "../components/LoginModal";
 
 class Home extends React.Component {
   constructor(props) {
@@ -11,26 +12,12 @@ class Home extends React.Component {
     this.state = {
       pokeballs: [],
       numPokeballs: 20,
-      numMaxPokedex: 809
+      numMaxPokedex: 809,
+      updatePokeballs: true
     };
   }
 
-  handleClickPokeball = dexId => {
-    alert("POKEMON!" + dexId);
-  };
-
   getTypePokeball = async (numPokedex, index) => {
-    // const pokeGli = await api.pokemon.glitch.detail(numPokedex);
-    // if (pokeGli[0].starter) {
-    //   return "great";
-    // } else if (
-    //   pokeGli[0].legendary ||
-    //   pokeGli[0].mythical ||
-    //   pokeGli[0].ultraBeast ||
-    //   pokeGli[0].mega
-    // ) {
-    //   return "master";
-    // } else {
     try {
       const LEGENDARY_IDS = [
         144,
@@ -113,6 +100,62 @@ class Home extends React.Component {
         808,
         809
       ];
+      const STARTER_IDS = [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        722,
+        723,
+        724,
+        725,
+        726,
+        727,
+        728,
+        729,
+        730
+      ];
 
       const pokeCo = await api.pokemon.co.detail(numPokedex);
       let sumStatBase = 0;
@@ -121,9 +164,14 @@ class Home extends React.Component {
       const legendary = LEGENDARY_IDS.some(item => {
         return item == pokeCo.id;
       });
-      console.log("ES LEGENDARIO : " + legendary);
+      const starter = STARTER_IDS.some(item => {
+        return item == pokeCo.id;
+      });
+
       if (legendary) {
         typePokeBall = "master";
+      } else if (starter) {
+        typePokeBall = "great";
       } else {
         pokeCo.stats.map((stat, i) => {
           sumStatBase = sumStatBase + stat.base_stat;
@@ -143,6 +191,7 @@ class Home extends React.Component {
             onRandomNumPokedex={numPokedex}
             typePokeBall={typePokeBall}
             isLegendary={legendary}
+            isStarter={starter}
           />
         ]
       }));
@@ -163,45 +212,41 @@ class Home extends React.Component {
   };
 
   render() {
-    if (this.state.pokeballs.length > 0) {
+    if (this.state.pokeballs.length > 0 && this.state.updatePokeballs) {
       return (
         <div className="Home">
           {this.state.pokeballs.map((pokeball, i) => {
             return <React.Fragment key={i}>{pokeball}</React.Fragment>;
           })}
+          <LoginModal />
         </div>
       );
     }
 
-    return (
-      <div className="Home">
-        <div>pokeballs null</div>
-      </div>
-    );
+    return <div className="Home"></div>;
   }
 
   componentDidMount() {
     this.createPokeballs();
+    this.idInterval = setInterval(() => {
+      // const pokeballsBack = this.state.pokeballs;
+      this.setState({ pokeballs: [] });
+      // this.setState({ pokeballs: pokeballsBack });this.createPokeballs();
+      this.createPokeballs();
+      console.log(this.state.pokeballs);
+    }, 180000);
   }
 
   createPokeballs = async () => {
     for (let index = 1; index <= this.state.numPokeballs; index++) {
       const numPokedex = Math.floor(Math.random() * this.state.numMaxPokedex);
-      this.getTypePokeball(numPokedex, index);
-
-      // this.setState(prevState => ({
-      //   pokeballs: [
-      //     ...prevState.pokeballs,
-      //     <Pokeball
-      //       index={index}
-      //       onClickPokeball={this.handleClickPokeball}
-      //       onRandomNumPokedex={numPokedex}
-      //       typePokeBall={typePokeBall}
-      //     />
-      //   ]
-      // }));
+      await this.getTypePokeball(numPokedex, index);
     }
   };
+
+  componentWillUnmount() {
+    clearInterval(this.idInterval);
+  }
 }
 
 export default Home;

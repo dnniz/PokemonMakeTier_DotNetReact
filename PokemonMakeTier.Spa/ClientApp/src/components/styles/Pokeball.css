@@ -59,22 +59,24 @@
 /*  GREAT BALL  */
 
 .ball.great::before {
-  -webkit-border-radius: 100px 100px 0 0;
-  -moz-border-radius: 100px 100px 0 0;
+  /* -webkit-border-radius: 100px 100px 0 0;
+  -moz-border-radius: 100px 100px 0 0; */
   border-radius: 100px 100px 0 0;
-  width: 200px;
-  height: 90px;
+  width: 185px;
+  height: 100px;
   background-color: #478ecc;
   border-bottom: 20px solid #333;
 }
 .ball.great .pattern {
   width: 33px;
   height: 0;
+  
   position: absolute;
   border-top: 80px solid #e62327;
   border-right: 30px solid transparent;
   border-left: 30px solid transparent;
-  margin: -3px 0 0 -10px;
+  /* margin: -3px 0 0 -10px; */
+  margin-left: 5px;
 }
 .ball.great .pattern.left {
   transform: rotate(-45deg);

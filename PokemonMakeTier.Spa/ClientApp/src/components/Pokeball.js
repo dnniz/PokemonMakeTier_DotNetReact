@@ -23,7 +23,7 @@ function useMovePokeball(index) {
         x: Math.random() * (index % 2 === 0 ? -1 * index : index),
         y: Math.random() * (index % 2 === 0 ? -1 * index : index)
       });
-    }, 60000);
+    }, 8000);
 
     return () => clearTimeout(idInterval);
   });
@@ -45,7 +45,7 @@ function Pokeball(props) {
                     `;
 
   const Move = styled.div`
-    animation: ${move} 60s ease-out alternate both infinite;
+    animation: ${move} 8s ease-out alternate both infinite;
   `;
 
   return (
@@ -65,15 +65,23 @@ function Pokeball(props) {
         {props.isLegendary ? (
           <React.Fragment>
             <span>W</span>
+          </React.Fragment>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+
+        {props.isStarter || props.isLegendary ? (
+          <React.Fragment>
             <div className="pattern left"></div>
             <div className="pattern right"></div>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <div className="pattern top"></div>
             <div className="pattern bottom"></div>
+            <div className="pattern top"></div>
           </React.Fragment>
         )}
+
         <span className={fadeIn ? "spanImage fadeOut" : "spanImage fadeIn"}>
           <img
             className="pokeImage"
