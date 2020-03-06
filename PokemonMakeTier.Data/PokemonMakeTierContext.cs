@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PokemonMakeTier.Entity;
 using System;
 
 namespace PokemonMakeTier.Data
 {
-    public class PokemonMakeTierContext : DbContext, IDbContext
+    public class PokemonMakeTierContext : IdentityDbContext, IDbContext
     {
         public PokemonMakeTierContext(DbContextOptions<PokemonMakeTierContext> options)
             :base(options)

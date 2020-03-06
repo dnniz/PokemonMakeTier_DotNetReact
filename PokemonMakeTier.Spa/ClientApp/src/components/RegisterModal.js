@@ -2,30 +2,17 @@ import React from "react";
 import Modal from "./Modal";
 
 import "./styles/Login.css";
-function LoginModal(props) {
+function RegisterModal(props) {
   return (
     <Modal>
-      <div className="LoginModal text-center">
-        <h3>
+      <div className="LoginModal">
+        <h3 className="text-center">
           <span className="font-weight-light">Pokemon</span>
           <span className="font-weight-bold">MakeTier</span>
         </h3>
         <hr />
-        <p>Para continuar, inicia sesión</p>
-        <div className="row justify-content-center">
-          <div className="col-sm-10 text-center">
-            <div className="">
-              <button className="loginBtn loginBtn--facebook btn-block text-center">
-                Continuar con Facebook
-              </button>
-              <button className="loginBtn loginBtn--google btn-block text-center">
-                Continuar con Google
-              </button>
-            </div>
-          </div>
-        </div>
-        <hr />
         <form onSubmit={props.onSubmit}>
+          <p className="text-center">Registro de usuario</p>
           <div className="row justify-content-center">
             <div className="col-sm-12">
               <div className="form-group">
@@ -34,6 +21,7 @@ function LoginModal(props) {
                   type="text"
                   className="form-control"
                   name="UserName"
+                  value={props.formValues.UserName}
                   onChange={props.onChange}
                 />
               </div>
@@ -48,6 +36,7 @@ function LoginModal(props) {
                   type="password"
                   className="form-control"
                   name="Password"
+                  value={props.formValues.Password}
                   onChange={props.onChange}
                 />
               </div>
@@ -56,15 +45,15 @@ function LoginModal(props) {
           <div className="row justify-content-center">
             <div className="col-sm-10">
               <button className="btn btn-primary btn-block text-center">
-                Ingresar
+                Registrarse
               </button>
             </div>
           </div>
         </form>
         <hr />
         <div className="text-center">
-          <button className="btn btn-link" onClick={props.onRegister}>
-            Registrarse
+          <button className="btn btn-link" onClick={props.onLogin}>
+            Ingresar
           </button>
         </div>
       </div>
@@ -72,4 +61,4 @@ function LoginModal(props) {
   );
 }
 
-export default LoginModal;
+export default RegisterModal;

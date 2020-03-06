@@ -4,6 +4,7 @@ import "./styles/Home.css";
 import Pokeball from "../components/Pokeball";
 import api from "../api";
 import LoginModal from "../components/LoginModal";
+import RegisterModal from "../components/RegisterModal";
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,9 +14,29 @@ class Home extends React.Component {
       pokeballs: [],
       numPokeballs: 20,
       numMaxPokedex: 809,
-      updatePokeballs: true
+      updatePokeballs: true,
+      onRegister: false,
+      form: {
+        UserName: "",
+        Password: "",
+        UserProfileId: 0
+      }
     };
   }
+
+  handleOpenRegister = e => {
+    this.setState({
+      onRegister: true
+    });
+    console.log("registrarse CLICK");
+  };
+
+  handleOpenLogin = e => {
+    this.setState({
+      onRegister: false
+    });
+    console.log("login CLICK");
+  };
 
   getTypePokeball = async (numPokedex, index) => {
     try {
@@ -198,8 +219,6 @@ class Home extends React.Component {
     } catch (error) {
       console.log(error);
     }
-
-    // }
   };
 
   generateRandomNumPokedex = () => {
@@ -218,12 +237,24 @@ class Home extends React.Component {
           {this.state.pokeballs.map((pokeball, i) => {
             return <React.Fragment key={i}>{pokeball}</React.Fragment>;
           })}
-          <LoginModal />
+          {this.state.onRegister && (
+            <RegisterModal
+              formValues={this.state.form}
+              onLogin={this.handleOpenLogin}
+            />
+          )}
+          {!this.state.onRegister && (
+            <LoginModal onRegister={this.handleOpenRegister} />
+          )}
         </div>
       );
     }
 
-    return <div className="Home"></div>;
+    return (
+      <div className="Home">
+        <LoginModal />
+      </div>
+    );
   }
 
   componentDidMount() {
