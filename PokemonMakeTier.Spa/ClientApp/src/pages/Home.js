@@ -18,24 +18,66 @@ class Home extends React.Component {
       onRegister: false,
       form: {
         UserName: "",
-        Password: "",
-        UserProfileId: 0
+        PasswordHash: "",
+        Email: ""
       }
     };
   }
 
   handleOpenRegister = e => {
     this.setState({
-      onRegister: true
+      onRegister: true,
+      form: {
+        UserName: "",
+        Password: ""
+      }
     });
     console.log("registrarse CLICK");
   };
 
   handleOpenLogin = e => {
     this.setState({
-      onRegister: false
+      onRegister: false,
+      form: {
+        UserName: "",
+        Password: ""
+      }
     });
     console.log("login CLICK");
+  };
+
+  handleRegisterUser = async e => {
+    e.preventDefault();
+    console.log("handleRegisterUser");
+    try {
+      await api.user.create(this.state.form);
+      this.setState({
+        register: false
+      });
+      this.props.history.push("/");
+    } catch (error) {
+      this.setState({ error: error });
+    }
+  };
+
+  handleChange = e => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  handleLogin = async e => {
+    e.preventDefault();
+
+    try {
+      const user = await api.user.login(this.state.form);
+      this.props.history.push("/greetings");
+    } catch (error) {
+      this.setState({ error: error });
+    }
   };
 
   getTypePokeball = async (numPokedex, index) => {
@@ -240,11 +282,17 @@ class Home extends React.Component {
           {this.state.onRegister && (
             <RegisterModal
               formValues={this.state.form}
+              onSubmit={this.handleRegisterUser}
               onLogin={this.handleOpenLogin}
+              onChange={this.handleChange}
             />
           )}
           {!this.state.onRegister && (
-            <LoginModal onRegister={this.handleOpenRegister} />
+            <LoginModal
+              onSubmit={this.handleLogin}
+              onRegister={this.handleOpenRegister}
+              onChange={this.handleChange}
+            />
           )}
         </div>
       );

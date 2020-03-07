@@ -16,12 +16,12 @@ function RegisterModal(props) {
           <div className="row justify-content-center">
             <div className="col-sm-12">
               <div className="form-group">
-                <label>Usuario</label>
+                <label>Correo</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="UserName"
-                  value={props.formValues.UserName}
+                  name="Email"
+                  value={props.formValues.Email}
                   onChange={props.onChange}
                 />
               </div>
@@ -35,8 +35,8 @@ function RegisterModal(props) {
                 <input
                   type="password"
                   className="form-control"
-                  name="Password"
-                  value={props.formValues.Password}
+                  name="PasswordHash"
+                  value={props.formValues.PasswordHash}
                   onChange={props.onChange}
                 />
               </div>

@@ -1,4 +1,5 @@
-const BASE_URL = "https://localhost:44338/api";
+// const BASE_URL = "https://localhost:44338/api";
+const BASE_URL = "../../api";
 const URL_POKEAPI_GLITCH = "https://pokeapi.glitch.me/v1";
 const URL_POKEAPI_CO = "https://pokeapi.co/api/v2";
 
@@ -29,6 +30,20 @@ const api = {
         return callApi(`/pokemon/${dexId}`, URL_POKEAPI_CO);
       }
     }
+  },
+  user: {
+    create(user) {
+      return callApi(`/user`, BASE_URL, {
+        method: "POST",
+        body: JSON.stringify(user)
+      });
+    }
+  },
+  login(user) {
+    return callApi(`/users/login`, BASE_URL, {
+      method: "POST",
+      body: JSON.stringify(user)
+    });
   }
 };
 

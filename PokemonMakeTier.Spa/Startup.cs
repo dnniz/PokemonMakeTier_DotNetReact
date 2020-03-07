@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PokemonMakeTier.Data;
+using PokemonMakeTier.Spa.Models;
 
 namespace PokemonMakeTier.Spa
 {
@@ -20,9 +22,23 @@ namespace PokemonMakeTier.Spa
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(configuration =>
+            {
+                configuration.CreateMap<UserDTO, IdentityUser>().ReverseMap();
+                //.ForMember(d => d.UserName, o => o.Ignore())
+                //.ForMember(dest => dest.UserName, opt => {
+                //    //opt.Condition(src => string.IsNullOrEmpty(src.UserName));
+                //    //opt.PreCondition(src => string.IsNullOrEmpty(src.UserName));
+                //    opt.MapFrom(src => src.Email); 
+                //})
+                ;
+                
+                //.ReverseMap();
+                //.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.UserName));
+            }, typeof(Startup));
+
             services.AddAuthentication()
                 .AddFacebook(options =>
                 { 
@@ -54,7 +70,7 @@ namespace PokemonMakeTier.Spa
                        .AllowAnyHeader();
             }));
 
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
